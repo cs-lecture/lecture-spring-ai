@@ -1,0 +1,29 @@
+server:
+  port: 8000
+  address: 0.0.0.0
+
+spring:
+  datasource:
+    url: jdbc:postgresql://172.29.12.5:5433/springai
+    username: postgres
+    password: postgres
+  ai:
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimensions: 384
+        batching-strategy: TOKEN_COUNT # Optional: Controls how documents are batched for embedding
+        max-document-batch-size: 10000 # Optional: Maximum number of documents per batch
+    ollama:
+      embedding:
+        enabled: true
+        model: all-minilm
+        #model: mistral
+      base-url: http://172.29.12.5:11434
+    moonshot:
+      api-key: ${MOONSHOT_API_KEY}
+      chat:
+        options:
+          model: moonshot-v1-8k
+          temperature: 0.7
