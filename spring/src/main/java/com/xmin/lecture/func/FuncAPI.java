@@ -1,4 +1,4 @@
-package com.xmin.lecture.restful;
+package com.xmin.lecture.func;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class FunctionController {
+public class FuncAPI {
 
     final ChatClient chatClient;
 
+    @GetMapping("/ai/funcCall")
+    public String funcCall(@RequestParam(value = "message") String message){
 
-    @GetMapping("/func/askForLeave")
-    public String ragChat(@RequestParam(value = "message", defaultValue = "Tell me a joke") String message) {
         return chatClient.prompt(message)
                 .functions("askForLeave")
-                .call()
-                .content();
+                .call().content();
+
     }
 }

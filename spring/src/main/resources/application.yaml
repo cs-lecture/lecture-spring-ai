@@ -16,6 +16,9 @@ spring:
         batching-strategy: TOKEN_COUNT # Optional: Controls how documents are batched for embedding
         max-document-batch-size: 10000 # Optional: Maximum number of documents per batch
     ollama:
+      chat:
+        options:
+          model: deepseek-r1
       embedding:
         enabled: true
         model: all-minilm
