@@ -15,11 +15,12 @@ public class VectorStoreWriteController {
 
     final VectorStore vectorStore;
 
-
     @GetMapping("/vec/write")
     public String chatWithRole() {
         StringBuilder text = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader("/nocode.txt"))) {
+        ClassLoader classLoader = VectorStoreWriteController.class.getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("nocode.txt");
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 text.append(line);

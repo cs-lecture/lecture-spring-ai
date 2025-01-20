@@ -19,6 +19,7 @@ public class ChatController {
 
     final ChatClient chatClient;
 
+
     final VectorStore vectorStore;
 
 
