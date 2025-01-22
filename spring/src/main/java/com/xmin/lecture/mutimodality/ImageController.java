@@ -13,20 +13,28 @@ import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class MultiModalityController {
+public class ImageController {
 
-    final OllamaChatModel chatModel;
+    final OllamaChatModel ollamaChatModel;
 
-    @GetMapping("/ai/chatWithPic")
-    public String chatWithPic() {
-        ClassPathResource imageData = new ClassPathResource("/cat.png");
+
+    @GetMapping("/ai/image")
+    public String loadVector() throws IOException {
+
+        ClassPathResource imageResource = new ClassPathResource("/cat.png");
+
         Message userMessage = new UserMessage("请用中文描述一下这张图片里面有什么东西？",
-                List.of(new Media(MimeTypeUtils.IMAGE_PNG, imageData)));
-        return this.chatModel.call(new Prompt(List.of(userMessage), ChatOptions.builder().model(OllamaModel.LLAVA.getName()).build()))
-                .getResult().getOutput().getContent();
+                List.of(new Media(MimeTypeUtils.IMAGE_PNG, imageResource))
+        );
+        return ollamaChatModel.call(new Prompt(List.of(userMessage), ChatOptions.builder()
+                .model(OllamaModel.LLAVA.getName())
+                .build())).getResult().getOutput().getContent();
+
     }
+
 }

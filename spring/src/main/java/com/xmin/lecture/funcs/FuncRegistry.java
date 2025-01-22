@@ -7,19 +7,22 @@ import org.springframework.context.annotation.Configuration;
 import java.util.function.Function;
 
 @Configuration
-public class FunctionRegistry {
+public class FuncRegistry {
+
 
     @Bean
-    public Function<OAService.Request, OAService.Response> askForLeave() { // bean name as function name
-        return new OAService();
+    public Function<OaService.Request, OaService.Response> askForLeave() {
+
+        return new OaService();
+
     }
+
 
     @Bean
     public FunctionCallback askForLeaveCallback() {
-        return FunctionCallback.builder()
-                .function("askForLeave", new OAService())
+        return FunctionCallback.builder().function("askForLeave", new OaService())
                 .description("当有人需要请假时，返回请假的天数")
-                .inputType(OAService.Request.class)
+                .inputType(OaService.Request.class)
                 .build();
     }
 

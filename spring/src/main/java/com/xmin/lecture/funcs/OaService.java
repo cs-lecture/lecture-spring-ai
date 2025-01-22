@@ -2,7 +2,7 @@ package com.xmin.lecture.funcs;
 
 import java.util.function.Function;
 
-public class OAService implements Function<OAService.Request, OAService.Response> {
+public class OaService implements Function<OaService.Request, OaService.Response> {
 
     @Override
     public Response apply(Request request) {
@@ -10,12 +10,16 @@ public class OAService implements Function<OAService.Request, OAService.Response
         return new Response(10);
     }
 
-    public record Request(String who){
+    public record Request(String who) {
 
     }
 
-    public record Response(int days){
+    ;
+
+
+    public record Response(int days) {
 
     }
+
 
 }
