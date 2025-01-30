@@ -12,7 +12,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
@@ -29,6 +28,6 @@ public class ImageAPI {
         return model.call(new Prompt(List.of(userMessage),
                         ChatOptions.builder()
                                 .model(OllamaModel.LLAVA.getName()).build()))
-                .getResult().getOutput().getContent();
+                .getResult().getOutput().getText();
     }
 }
